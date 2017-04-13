@@ -9,11 +9,19 @@ GETTING ACESSS TOKENS
 
 Setup
 
-You will first need to provide the application mssql server enviroment varibles.
-MSSQL_IP="000.000.000.000"
-MSSQL_USER="USER"
-MSSQL_PASS="PASSWORD"
-MSSQL_DATABASE="DATABASE_NAME"
+You will first need to provide the application mssql server and Mongodb enviroment varibles. Create a config.js file with the following. 
+module.exports = {
+  'secret': '',
+  // mongoDB
+  'mongodb_host': '',
+  'mongodb_user': '',
+  'mongodb_password': '',
+  // mssql DB
+  'mssql_ip': '',
+  'mssql_user': '',
+  'mssql_pass': '',
+  'mssql_database': ''
+};
 
 Running 
 
