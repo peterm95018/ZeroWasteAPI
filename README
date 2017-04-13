@@ -1,0 +1,29 @@
+Zero Waste Interface API
+
+API 
+
+Host `zerowaste.ucsc.edu` 
+
+
+GETTING ACESSS TOKENS
+
+Setup
+
+You will first need to provide the application mssql server enviroment varibles.
+MSSQL_IP="000.000.000.000"
+MSSQL_USER="USER"
+MSSQL_PASS="PASSWORD"
+MSSQL_DATABASE="DATABASE_NAME"
+
+Running 
+
+Stopping Process
+
+Find your port number.
+netstat -nlp | grep :8080
+tcp        0      0 0.0.0.0:8080         0.0.0.0:*                   LISTEN      1073/node
+Kill the process.
+kill 1073
+# Force kill
+kill -9 1073
+
