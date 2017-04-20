@@ -7,6 +7,12 @@ var config = require('./config'); // get our config file
 // Api Router Handler
 var api = express.Router();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 api.get('/db', function(req, res){
 
     var sql = require("mssql");
