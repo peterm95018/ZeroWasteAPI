@@ -2,8 +2,6 @@ var express = require('express');
 var app = express();
 var bodyParser  = require('body-parser');
 
-var config = require('./config'); // get our config file
-
 // Api Router Handler
 var api = express.Router();
 
@@ -17,14 +15,14 @@ api.get('/db', function(req, res){
 
     var sql = require("mssql");
     sql.config = {
-        server: config.mssql_ip,
-        user: config.mssql_user,
-        password: config.mssql_pass,
-        database: config.mssql_database
+        server: process.env.MSSQL_IP,
+        user: process.env.MSSQL_USER,
+        password: process.env.MSSQL_PASS,
+        database: process.env.MSSQL_DATABASE
     };
   const pool1 = new sql.ConnectionPool(sql.config, err => {
     pool1.request() // or: new sql.Request(pool1)
-    .query('SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record) as row FROM ExportLoadData) a WHERE row > 1 and row <= 100', (err, result) => {
+    .query('SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-60, GETDATE())', (err, result) => {
         res.json(result);
       })
   })
@@ -35,7 +33,7 @@ api.get('/db', function(req, res){
 
   const pool2 = new sql.ConnectionPool(sql.config, err => {
       pool2.request() // or: new sql.Request(pool2)
-      .query('SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record) as row FROM ExportLoadData) a WHERE row > 1 and row <= 100', (err, result) => {
+      .query('SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-60, GETDATE())', (err, result) => {
     // ... error checks
       })
   })

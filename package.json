@@ -4,6 +4,7 @@
   "description": "Zero Waste Data Interface API",
   "main": "serve.js",
   "scripts": {
+    "start": "nodemon serve.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "peterm",
