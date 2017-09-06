@@ -5,6 +5,8 @@ var bodyParser  = require('body-parser');
 // Api Router Handler
 var api = express.Router();
 
+const sqlQuery = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-10, GETDATE())';
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -22,7 +24,7 @@ api.get('/db', function(req, res){
     };
   const pool1 = new sql.ConnectionPool(sql.config, err => {
     pool1.request() // or: new sql.Request(pool1)
-    .query('SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-60, GETDATE())', (err, result) => {
+    .query(sqlQuery, (err, result) => {
         res.json(result);
       })
   })
@@ -33,14 +35,14 @@ api.get('/db', function(req, res){
 
   const pool2 = new sql.ConnectionPool(sql.config, err => {
       pool2.request() // or: new sql.Request(pool2)
-      .query('SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-60, GETDATE())', (err, result) => {
+      .query(sqlQuery, (err, result) => {
     // ... error checks
       })
   })
 
   pool2.on('error', err => {
       // ... error handler
-  })	
+  })
 });
 
 app.get('/', function(req, res){
