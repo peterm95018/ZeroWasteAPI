@@ -5,7 +5,6 @@ var bodyParser  = require('body-parser');
 // Api Router Handler
 var api = express.Router();
 
-<<<<<<< HEAD
 const db1 = 'WebLoadDataSource';
 const db2 = 'ExportLoadData';
 
