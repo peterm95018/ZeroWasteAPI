@@ -8,8 +8,12 @@ var api = express.Router();
 const db1 = 'WebLoadDataSource';
 const db2 = 'ExportLoadData';
 
-const sqlQuery2 = `SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ${db1}) a WHERE PickupTime BETWEEN '2017-04-04' AND '2017-06-04'`;
-const sqlQuery1 = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ${db1}) a WHERE PickupTime >= DATEADD(day,-30, GETDATE())';
+const startDate = `'2017-07-04'`;
+const endDate = `'2017-08-04'`;
+
+const sqlQuery1 = `SELECT * FROM ${db1} WHERE PickupTime BETWEEN ${startDate} AND ${endDate} ORDER BY PickupTime ASC`;
+const sqlQuery2 = `SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ${db1}) a WHERE PickupTime >= DATEADD(day,-30, GETDATE())`;
+const sqlQuery3 = `SELECT * FROM ${db1} WHERE PickupTime >= DATEADD(day,-200, GETDATE()) ORDER BY PickupTime ASC`;
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
