@@ -5,8 +5,13 @@ var bodyParser  = require('body-parser');
 // Api Router Handler
 var api = express.Router();
 
+<<<<<<< HEAD
 const db1 = 'WebLoadDataSource';
 const db2 = 'ExportLoadData';
+
+//2017 Spring Quarter data (approx 60 days)
+const springStart = `'2017-04-04'`;
+const springEnd = `'2017-06-04'`;
 
 const startDate = `'2017-07-04'`;
 const endDate = `'2017-08-04'`;
@@ -34,23 +39,23 @@ api.get('/db', function(req, res){
     pool1.request() // or: new sql.Request(pool1)
     .query(sqlQuery1, (err, result) => {
         res.json(result);
-      })
-  })
+      });
+  });
 
   pool1.on('error', err => {
      res.json(result);
-  })
+  });
 
   const pool2 = new sql.ConnectionPool(sql.config, err => {
       pool2.request() // or: new sql.Request(pool2)
       .query(sqlQuery1, (err, result) => {
     // ... error checks
-      })
-  })
+    });
+  });
 
   pool2.on('error', err => {
       // ... error handler
-  })
+  });
 });
 
 app.get('/', function(req, res){
