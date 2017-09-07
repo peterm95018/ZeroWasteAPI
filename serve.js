@@ -5,7 +5,8 @@ var bodyParser  = require('body-parser');
 // Api Router Handler
 var api = express.Router();
 
-const sqlQuery = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-10, GETDATE())';
+const sqlQuery1 = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime BETWEEN 2017-04-04 AND 2017-06-04';
+const sqlQuery2 = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-10, GETDATE())';
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -24,7 +25,7 @@ api.get('/db', function(req, res){
     };
   const pool1 = new sql.ConnectionPool(sql.config, err => {
     pool1.request() // or: new sql.Request(pool1)
-    .query(sqlQuery, (err, result) => {
+    .query(sqlQuery1, (err, result) => {
         res.json(result);
       })
   })
@@ -35,7 +36,7 @@ api.get('/db', function(req, res){
 
   const pool2 = new sql.ConnectionPool(sql.config, err => {
       pool2.request() // or: new sql.Request(pool2)
-      .query(sqlQuery, (err, result) => {
+      .query(sqlQuery1, (err, result) => {
     // ... error checks
       })
   })
