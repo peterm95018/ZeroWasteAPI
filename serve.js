@@ -5,7 +5,7 @@ var bodyParser  = require('body-parser');
 // Api Router Handler
 var api = express.Router();
 
-const sqlQuery1 = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime BETWEEN 2017-04-04 AND 2017-06-04';
+const sqlQuery1 = `SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime BETWEEN '2017-04-04' AND '2017-06-04'`;
 const sqlQuery2 = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-10, GETDATE())';
 
 app.use(function(req, res, next) {
@@ -51,5 +51,5 @@ app.get('/', function(req, res){
 });
 
 app.use('/api', api);
-
+console.log(process.env);
 app.listen(3001);
