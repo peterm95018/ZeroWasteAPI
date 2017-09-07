@@ -5,8 +5,11 @@ var bodyParser  = require('body-parser');
 // Api Router Handler
 var api = express.Router();
 
-const sqlQuery1 = `SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime BETWEEN '2017-04-04' AND '2017-06-04'`;
-const sqlQuery2 = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ExportLoadData) a WHERE PickupTime >= DATEADD(day,-10, GETDATE())';
+const db1 = 'WebLoadDataSource';
+const db2 = 'ExportLoadData';
+
+const sqlQuery2 = `SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ${db1}) a WHERE PickupTime BETWEEN '2017-04-04' AND '2017-06-04'`;
+const sqlQuery1 = 'SELECT * FROM (SELECT *, ROW_NUMBER() OVER (ORDER BY Record DESC) as row FROM ${db1}) a WHERE PickupTime >= DATEADD(day,-30, GETDATE())';
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
