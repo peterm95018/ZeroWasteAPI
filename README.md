@@ -37,16 +37,16 @@ password: ##########
 
 ```cd ZeroWasteAPI```
 
-- Update the UCSC files with the latest master version
+- Update the UCSC files with the latest master version<br/>
 ```git pull```
-- Find the running processes
+- Find the running processes<br/>
 ``ps aux | grep "node"`` or ``ps aux | grep "node API_server.js"``
-- Kill the running processes
-```kp       13996  4.8  0.7  69788 33280 pts/10   Sl   May14   0:00 node APIserver.js```
+- Kill the running processes<br/>
+`kp 13996  4.8  0.7  69788 33280 pts/10   Sl   May14   0:00 node APIserver.js`<br/>
 `kill 13996`
-- Or do the last two in one step (careful because this will kill all processes with this name)
+- Or do the last two in one step (careful because this will kill all processes with this name)<br/>
 pkill -f "node API_server.js"
-- Restart the Interface by running ('nohup' and '&' mean the server will run in the background)
+- Restart the Interface by running ('nohup' and '&' mean the server will run in the background)<br/>
 ```nohup node serve.js &```
 
 
