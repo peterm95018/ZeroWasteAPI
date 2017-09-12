@@ -21,9 +21,9 @@ http://zerowaste.ucsc.edu:3001/api/days/45<br/>
 http://zerowaste.ucsc.edu:3001/api/days/60<br/>
 
 ## Setting up the Server
-- Remote into the UCSC server
+- Remote into the UCSC server<br/>
 `~/$ ssh kp@zerowaste.ucsc.edu`<br/>
-~/$ password: ######## <br/>
+`~/$ password: ######## <br/>`
 `~/$ cd ZeroWasteAPI`<br/>
 - Update the UCSC files with the latest master version<br/>
 `~/$ git pull`
