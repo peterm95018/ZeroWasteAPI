@@ -19,6 +19,7 @@ const fallEnd = `'2017-12-15'`;
 
 const querySpring = `SELECT * FROM ${db} WHERE PickupTime BETWEEN ${springStart} AND DATEADD(day, 1, ${springEnd}) ORDER BY PickupTime ASC`;
 const queryFall = `SELECT * FROM ${db} WHERE PickupTime BETWEEN ${fallStart} AND DATEADD(day, 1, ${fallEnd}) ORDER BY PickupTime ASC`;
+const queryLast100Pickups = `SELECT * FROM (SELECT * FROM ${db} ORDER BY PickupTime DESC LIMIT 100) ORDER BY PickupTime ASC`;
 const query30days = `SELECT * FROM ${db} WHERE PickupTime >= DATEADD(day,-30, GETDATE()) ORDER BY PickupTime ASC`;
 const query45days = `SELECT * FROM ${db} WHERE PickupTime >= DATEADD(day,-45, GETDATE()) ORDER BY PickupTime ASC`;
 const query60days = `SELECT * FROM ${db} WHERE PickupTime >= DATEADD(day,-60, GETDATE()) ORDER BY PickupTime ASC`;
@@ -44,7 +45,7 @@ const createConnectionPool = function(query) {
       pool.request()
       .query(query, (error, result) => {
         // ... error checks
-        res.json(result);
+        res.json(result.recordset);
       });
     });
     pool.on('error', err => {
@@ -66,9 +67,10 @@ const createConnectionPool = function(query) {
 // });
 
 api.get('/db', createConnectionPool(query60days));
-api.get('/30', createConnectionPool(query30days));
-api.get('/45', createConnectionPool(query45days));
-api.get('/60', createConnectionPool(query60days));
+api.get('/last/100', createConnectionPool(queryLast100Pickups));
+api.get('/days/30', createConnectionPool(query30days));
+api.get('/days/45', createConnectionPool(query45days));
+api.get('/days/60', createConnectionPool(query60days));
 api.get('/2017/fall', createConnectionPool(queryFall));
 api.get('/2017/spring', createConnectionPool(querySpring));
 
