@@ -35,7 +35,7 @@ http://zerowaste.ucsc.edu:3001/api/days/60<br/>
 - Or do the last two in one step (careful because this will kill all processes with this name)<br/>
 `~/$ pkill -f "node APIserver.js"`
 - Start Server by running (inclue 'nohup' and '&' so the server will run in the background)<br/>
-`~/$ nohup node serve.js &`
+`~/$ nohup node APIserver.js &`
 
 
 ### Schema:
