@@ -38,38 +38,39 @@ sql.config = {
   database: process.env.MSSQL_DATABASE
 };
 
-const createPools = function(query) {
+const createConnectionPool = function(query) {
   return function(req, res){
-    new sql.ConnectionPool(sql.config).connect().then(pool => {
-        return pool.query(query);
-    }).then(result => {
+    const pool = new sql.ConnectionPool(sql.config, err => {
+      pool.request()
+      .query(query, (error, result) => {
+        // ... error checks
         res.json(result);
-    }).catch(err => {
+      });
+    });
+    pool.on('error', err => {
+        // ... error handler
+        console.log("error response");
         res.json(err);
     });
   };
 };
 
-// const pool1 = new sql.ConnectionPool(sql.config, err => {
-//   pool1.request()
-//   .query(query, (error, result) => {
-//     // ... error checks
-//     res.json(result);
-//   });
-// });
-// const pool2 = new sql.ConnectionPool(sql.config, err => {
-//   pool2.request()
-//   .query(query, (error, result) => {
-//     // ... error checks
-//   });
+// new sql.ConnectionPool(sql.config).connect().then(pool => {
+//   return pool.query(query);
+// }).then(result => {
+//   console.log("success response");
+//   res.json(result);
+// }).catch(err => {
+//   console.log("error response");
+//   // res.json(err);
 // });
 
-api.get('/db', createPools(query60days));
-api.get('/30', createPools(query30days));
-api.get('/45', createPools(query45days));
-api.get('/60', createPools(query60days));
-api.get('/2017/fall', createPools(queryFall));
-api.get('/2017/spring', createPools(querySpring));
+api.get('/db', createConnectionPool(query60days));
+api.get('/30', createConnectionPool(query30days));
+api.get('/45', createConnectionPool(query45days));
+api.get('/60', createConnectionPool(query60days));
+api.get('/2017/fall', createConnectionPool(queryFall));
+api.get('/2017/spring', createConnectionPool(querySpring));
 
 app.get('/', function(req, res){
   res.send("Zero Waste Api 1.0.0");

@@ -1,15 +1,15 @@
 Zero Waste Interface API
 
-API 
+API
 
-Host `zerowaste.ucsc.edu` 
+Host `zerowaste.ucsc.edu`
 
 
 GETTING ACESSS TOKENS
 
 Setup
 
-You will first need to provide the application mssql server and Mongodb enviroment varibles. Create a config.js file with the following. 
+You will first need to provide the application mssql server and Mongodb enviroment varibles. Create a config.js file with the following.
 module.exports = {
   'secret': '',
   // mongoDB
@@ -23,7 +23,7 @@ module.exports = {
   'mssql_database': ''
 };
 
-Running 
+Running
 
 Stopping Process
 
@@ -35,3 +35,29 @@ kill 1073
 # Force kill
 kill -9 1073
 
+
+      Error response:
+      {
+        code: "EREQUEST",
+        number: 2812,
+        lineNumber: 1,
+        state: 62,
+        class: 16,
+        serverName: "PP-PROD-DB-1",
+        procName: "",
+        originalError: {
+          info: {
+          number: 2812,
+          state: 62,
+          class: 16,
+          message: "Could not find stored procedure 'S'.",
+          serverName: "PP-PROD-DB-1",
+          procName: "",
+          lineNumber: 1,
+          name: "ERROR",
+          event: "errorMessage"
+          }
+        },
+        name: "RequestError",
+        precedingErrors: [ ]
+      }
