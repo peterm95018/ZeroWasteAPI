@@ -4,6 +4,7 @@
 - express server, MSsql
 - queries using Transact-SQL
 - config details are located in .bash_profile
+
       config = {
         server: process.env.MSSQL_IP,
         user: process.env.MSSQL_USER,
