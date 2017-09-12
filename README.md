@@ -1,9 +1,9 @@
 # Zero Waste API
 
 ## Server Details
-- express server, MSsql
-- queries using Transact-SQL
-- config details are located in .bash_profile
+- Express server, MSsql
+- Queries using Transact-SQL
+- Config details are located in .bash_profile
 
       config = {
         server: process.env.MSSQL_IP,
@@ -13,7 +13,6 @@
       };
 
 ## API endpoints
-- Host `zerowaste.ucsc.edu`<br/>
 http://zerowaste.ucsc.edu:3001/api/2017/spring<br/>
 http://zerowaste.ucsc.edu:3001/api/2017/fall<br/>
 http://zerowaste.ucsc.edu:3001/api/days/15<br/>
@@ -22,9 +21,9 @@ http://zerowaste.ucsc.edu:3001/api/days/45<br/>
 http://zerowaste.ucsc.edu:3001/api/days/60<br/>
 
 ## Setting up the Server
-- Remote into the ucsc server
+- Remote into the UCSC server
 `~/$ ssh kp@zerowaste.ucsc.edu`<br/>
-~/$ password: ???????????? <br/>
+~/$ password: ######## <br/>
 `~/$ cd ZeroWasteAPI`<br/>
 - Update the UCSC files with the latest master version<br/>
 `~/$ git pull`
