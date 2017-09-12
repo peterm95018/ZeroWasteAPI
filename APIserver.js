@@ -41,19 +41,29 @@ sql.config = {
 const createPools = function(query) {
   return function(req, res){
     const pool1 = new sql.ConnectionPool(sql.config, err => {
-      pool1.request() // or: new sql.Request(pool1)
+      pool1.request()
       .query(query, (error, result) => {
-          res.json(result);
-        });
+        // ... error checks
+        res.json(result);
+      });
     });
     const pool2 = new sql.ConnectionPool(sql.config, err => {
-        pool2.request() // or: new sql.Request(pool2)
-        .query(query, (error, result) => {
+      pool2.request()
+      .query(query, (error, result) => {
       // ... error checks
+      res.json(result);
       });
     });
   };
 };
+
+// new sql.ConnectionPool(config).connect().then(pool => {
+//     return pool.query`select * from mytable where id = ${value}`
+// }).then(result => {
+//     console.dir(result)
+// }).catch(err => {
+//     // ... error checks
+// })
 
 api.get('/db', createPools(query60days));
 api.get('/30', createPools(query30days));
