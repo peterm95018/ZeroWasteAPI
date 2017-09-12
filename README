@@ -4,13 +4,7 @@ API
 
 Host `zerowaste.ucsc.edu`
 
-
-GETTING ACESSS TOKENS
-
-Setup
-
-You will first need to provide the application mssql server and Mongodb enviroment varibles. Create a config.js file with the following.
-module.exports = {
+ = {
   'secret': '',
   // mongoDB
   'mongodb_host': '',
@@ -23,17 +17,37 @@ module.exports = {
   'mssql_database': ''
 };
 
-Running
 
-Stopping Process
+## API endpoints
+http://zerowaste.ucsc.edu:3001/api/2017/spring
+http://zerowaste.ucsc.edu:3001/api/2017/fall
+http://zerowaste.ucsc.edu:3001/api/days/15
+http://zerowaste.ucsc.edu:3001/api/days/30
+http://zerowaste.ucsc.edu:3001/api/days/45
+http://zerowaste.ucsc.edu:3001/api/days/60
 
-Find your port number.
-netstat -nlp | grep :8080
-tcp        0      0 0.0.0.0:8080         0.0.0.0:*                   LISTEN      1073/node
-Kill the process.
-kill 1073
-# Force kill
-kill -9 1073
+## Server Details
+- express server, MSsql
+- queries using Transact-SQL
+
+## Running the server
+
+ssh kp@zerowaste.ucsc.edu
+password: ##########
+
+```cd ZeroWasteAPI```
+
+- Update the UCSC files with the latest master version
+```git pull```
+- Find the running processes
+``ps aux | grep "node"`` or ``ps aux | grep "node API_server.js"``
+- Kill the running processes
+```kp       13996  4.8  0.7  69788 33280 pts/10   Sl   May14   0:00 node APIserver.js```
+`kill 13996`
+- Or do the last two in one step (careful because this will kill all processes with this name)
+pkill -f "node API_server.js"
+- Restart the Interface by running ('nohup' and '&' mean the server will run in the background)
+```nohup node serve.js &```
 
 
       schema:
