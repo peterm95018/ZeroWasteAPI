@@ -30,8 +30,8 @@ http://zerowaste.ucsc.edu:3001/api/days/60<br/>
 - Find the running processes<br/>
 `~/$ ps aux | grep "node"` or `~/$ ps aux | grep "node APIserver.js"`
 - Kill the running processes<br/>
-`kp 13996  4.8  0.7  69788 33280 pts/10   Sl   May14   0:00 node APIserver.js`<br/>
-`~/$ kill 13996`
+`kp #####  4.8  0.7  69788 33280 pts/10   Sl   May14   0:00 node APIserver.js`<br/>
+`~/$ kill #####`
 - Or do the last two in one step (careful because this will kill all processes with this name)<br/>
 `~/$ pkill -f "node APIserver.js"`
 - Start Server by running ('nohup' and '&' mean the server will run in the background)<br/>
