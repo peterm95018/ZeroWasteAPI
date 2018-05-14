@@ -84,3 +84,6 @@ http://zerowaste.ucsc.edu:3001/api/days/60<br/>
         name: "RequestError",
         precedingErrors: [ ]
       }
+
+### Starting Up and App Monitoring
+On the VM host zerowaste.ucsc.edu, we are using PM2 to manage the node apps in Interface and ZeroWasteAPI. Users can monitor the status of the apps using pm2 commands.
